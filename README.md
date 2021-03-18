@@ -1,10 +1,13 @@
 # Project Description
 
-A brief description of what this repository is for and what it contains
+Code used to replicate the methods of "A comprehensive study design reveals treatment- and transcript abundance-dependent concordance between RNA-seq and microarray data"
 
 # Contributors
 
-List contributor names and github user names, or email addresses if desired
+Taylor Falk (Data curator)
+Bettenia "Tina" Cole (Programmer)
+Saket Pandit (Data analyst)
+Mackenzie Knox (Biologist)
 
 # Repository Contents
 
