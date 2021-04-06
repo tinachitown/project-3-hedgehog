@@ -166,7 +166,7 @@ thio_t10 <- thio_genes %>%
 # write.csv(thio_t10,'thio_t10.csv')
 
 ## 3. "Histograms of fold change values and scatter plots of fold change vs nominal-pvalue from the significant DE genes"
-#jpeg("histograms.jpeg")
+jpeg("histograms.jpeg")
 par(mfrow=c(2,2), oma=c(0,0,2,0))
 hist(beta_t10$logFC,
      main="Beta-Naphthoflavone",
@@ -178,9 +178,9 @@ hist(thio_t10$logFC,
      main="Thioacetamide",
      xlab="log(Fold Change)")
 mtext("Distribution of Fold Change Values", line = 0, outer=TRUE, cex=1.5)
+dev.off()
 
-#par(mfrow=c(1,1), oma=c(0,0,0,0))
-#jpeg("scatter_plot.jpeg")
+jpeg("scatter_plots.jpeg")
 par(mfrow=c(2,2), oma=c(0,0,2,0))
 plot(beta_t10$logFC, beta_t10$P.Value,
      xlab = "log(FC)", ylab = "P-value",
@@ -192,3 +192,4 @@ plot(thio_t10$logFC, thio_t10$P.Value,
      xlab = "log(FC)", ylab = "P-value",
      main = "Thioacetamide")
 mtext("Scatter Plots of Fold Change vs P-value", line = 0, outer=TRUE, cex=1.5)
+dev.off()
