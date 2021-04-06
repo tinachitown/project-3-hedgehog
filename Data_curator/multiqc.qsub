@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#$ -P bf528
+#$ -cwd
+
+source /etc/bashrc
+
+module load python2
+module load multiqc/1.6
+
+multiqc /projectnb/bf528/users/hedgehog/project_3/data_curator_data/fastqs
+
