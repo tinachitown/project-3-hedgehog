@@ -227,52 +227,44 @@ bemed_thio_conc <- concordance(bemed_thio_agreed, bemed_thio_rna_degs, bemed_thi
 
 # Plots -------------------------------------------------------------------
 jpeg("concordance_scatter.jpeg")
-par(mfrow=c(2,2))
-## Overall
-x <- c(length(beta_rna_degs), length(econ_rna_degs), length(thio_rna_degs))
-y1 <- c(beta_conc, econ_conc, thio_conc)
-bf_line <- stats::lm(y1~x)
+par(mfrow=c(1,2), oma=c(0,0,2,0))
+## RNA-Seq
+x1 <- c(length(beta_rna_degs), length(econ_rna_degs), length(thio_rna_degs))
+y <- c(beta_conc, econ_conc, thio_conc)
+bf_line <- stats::lm(y~x1)
 names <- c("NAP", "ECO", "THI")
-plot(x,y1,
-     xlab = "Number of DEGs from RNA-Seq",
+plot(x1,y,
+     xlab = "Number of DEGs",
      ylab = "Concordance",
-     main = "Overall")
-lines(x, fitted(bf_line),lty="dashed")
-text(x, c((y1[1:2]+0.01), (y1[3]-0.01)), labels = names)
-
-## Above Median
-x <- c(length(abmed_beta_rna_degs), length(abmed_econ_rna_degs), length(abmed_thio_rna_degs))
-y2 <- c(abmed_beta_conc, abmed_econ_conc, abmed_thio_conc)
-bf_line <- stats::lm(y2~x)
+     main = "RNA-Seq")
+lines(x1, fitted(bf_line),lty="dashed")
+text(x1, c((y[1:2]+0.01), (y[3]-0.01)), labels = names)
+## Microarray
+x2 <- c(length(beta_mic_degs), length(econ_mic_degs), length(thio_mic_degs))
+y <- c(beta_conc, econ_conc, thio_conc)
+bf_line <- stats::lm(y~x2)
 names <- c("NAP", "ECO", "THI")
-plot(x,y2,
-     xlab = "Number of DEGs from RNA-Seq",
+plot(x2,y,
+     xlab = "Number of DEGs",
      ylab = "Concordance",
-     main = "Above Median")
-lines(x, fitted(bf_line),lty="dashed")
-text(x, c((y2[1:2]+0.01), (y2[3]-0.01)), labels = names)
-
-## Below Median
-x <- c(length(bemed_beta_rna_degs), length(bemed_econ_rna_degs), length(bemed_thio_rna_degs))
-y3 <- c(bemed_beta_conc, bemed_econ_conc, bemed_thio_conc)
-bf_line <- stats::lm(y3~x)
-names <- c("NAP", "ECO", "THI")
-plot(x,y3,
-     xlab = "Number of DEGs from RNA-Seq",
-     ylab = "Concordance",
-     main = "Below Median")
-lines(x, fitted(bf_line),lty="dashed")
-text(x, c((y3[1:2]+0.01), (y3[3]-0.01)), labels = names)
+     main = "Microarray")
+lines(x2, fitted(bf_line),lty="dashed")
+text(x2, c((y[1:2]+0.01), (y[3]-0.01)), labels = names)
+mtext("Concordances by Platform", line = 0, outer=TRUE, cex=1.5)
 dev.off()
 
 # Barplot
-c <- matrix(c(y1,y2,y3), ncol=3, nrow = 3)
+ovr <- c(beta_conc, econ_conc, thio_conc)
+abmed <- c(abmed_beta_conc, abmed_econ_conc, abmed_thio_conc)
+bemed <- c(bemed_beta_conc, bemed_econ_conc, bemed_thio_conc)
+c <- matrix(c(ovr,abmed,bemed), ncol=3, nrow = 3)
 colnames(c) <- c("Overall", "Above Median", "Below Median")
 jpeg("barplot.jpeg")
-par(mfrow=c(1,1))
+par(mfrow=c(1,1), oma=c(0,0,2,0))
 barplot(c,beside=T, 
         col=c('blue', 'red', 'green'))
-legend("topleft", 
+legend("topright", 
        c("NAP", "ECO", "THIO"),
        fill=c("blue", "red", 'green'))
+mtext("Concordance by Average Expression Values", line = -1, outer=TRUE, cex=1.5)
 dev.off()
