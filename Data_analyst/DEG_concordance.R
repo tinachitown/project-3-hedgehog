@@ -238,7 +238,7 @@ plot(x1,y,
      ylab = "Concordance",
      main = "RNA-Seq")
 lines(x1, fitted(bf_line),lty="dashed")
-text(x1, c((y[1:2]+0.01), (y[3]-0.01)), labels = names)
+text(c(x1[1]+30, x1[2], x1[3]-10), c((y[1:2]+0.012), (y[3]-0.01)), labels = names)
 ## Microarray
 x2 <- c(length(beta_mic_degs), length(econ_mic_degs), length(thio_mic_degs))
 y <- c(beta_conc, econ_conc, thio_conc)
@@ -249,7 +249,7 @@ plot(x2,y,
      ylab = "Concordance",
      main = "Microarray")
 lines(x2, fitted(bf_line),lty="dashed")
-text(x2, c((y[1:2]+0.01), (y[3]-0.01)), labels = names)
+text(c(x2[1]+50, x2[2], x2[3]-20), c((y[1:2]+0.01), (y[3]-0.01)), labels = names)
 mtext("Concordances by Platform", line = 0, outer=TRUE, cex=1.5)
 dev.off()
 
@@ -264,7 +264,7 @@ par(mfrow=c(1,1), oma=c(0,0,2,0))
 barplot(c,beside=T, 
         col=c('blue', 'red', 'green'))
 legend("topright", 
-       c("NAP", "ECO", "THIO"),
+       c("NAP", "ECO", "THI"),
        fill=c("blue", "red", 'green'))
 mtext("Concordance by Average Expression Values", line = -1, outer=TRUE, cex=1.5)
 dev.off()
