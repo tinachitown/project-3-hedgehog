@@ -98,7 +98,7 @@ thio_genes <- t3 %>%
 
 
 # ProbeID --> Genes -------------------------------------------------------
-# (copied from DEG_concordance)
+# (copied from DEG_concordance, modified slightly)
 ## Functions
 affy_to_refseq <- function(x){ 
   refseq <- refseq_mapping %>% 
